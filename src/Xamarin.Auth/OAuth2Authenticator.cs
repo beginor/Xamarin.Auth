@@ -210,13 +210,14 @@ namespace Xamarin.Auth
 		public override Task<Uri> GetInitialUrlAsync ()
 		{
 			var url = new Uri (string.Format (
-				"{0}?client_id={1}&redirect_uri={2}&response_type={3}&scope={4}&state={5}",
+				"{0}?client_id={1}&redirect_uri={2}&response_type={3}&scope={4}&state={5}&client_secret={6}",
 				authorizeUrl.AbsoluteUri,
 				Uri.EscapeDataString (clientId),
 				Uri.EscapeDataString (RedirectUrl.AbsoluteUri),
 				IsImplicit ? "token" : "code",
 				Uri.EscapeDataString (scope),
-				Uri.EscapeDataString (requestState)));
+				Uri.EscapeDataString (requestState),
+				clientSecret));
 
 			var tcs = new TaskCompletionSource<Uri> ();
 			tcs.SetResult (url);
